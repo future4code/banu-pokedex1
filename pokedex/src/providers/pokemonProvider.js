@@ -5,6 +5,7 @@ import axios from 'axios';
 const PokemonProvider = ({children}) => {
     const [pokemon, setPokemon] = useState(undefined)
     const [pokemonDetail, setPokemonDetail] = useState([])
+    const [pokeList, setPokeList] = useState([])
 
     useEffect(() => {
         axios.get(`https://pokeapi.co/api/v2/pokemon/`)
@@ -36,8 +37,10 @@ const PokemonProvider = ({children}) => {
         <PokemonContext.Provider value={{
             pokemon,
             pokemonDetail,
+            pokeList,
             setPokemon,
-            setPokemonDetail
+            setPokemonDetail,
+            setPokeList
         }}>
             {children}
         </PokemonContext.Provider>

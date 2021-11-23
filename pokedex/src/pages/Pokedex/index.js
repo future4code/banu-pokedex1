@@ -1,88 +1,65 @@
-import { } from './style'; // Aqui vai o seu CSS do styled
-import styled from 'styled-components';
+import { Header, Button, Maindiv, Pokecard, Pokephoto, Pokebutton, Buttons } from './style';
+// import styled from 'styled-components';
 import { useNavigate } from "react-router";
 import { useContext } from "react";
 import PokemonContext from "../../contexts/DataContext";
 
-//CSS HEADER
-const Header = styled.header`
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 27vw;
-    border: 1px solid black;
-    background-color: red;
-    color: #fff;
-    width: 100vw;
-    height: 5vw;
-    padding-left: 2vw;
-`;
-
-const Button = styled.button`
-    background-color: #FFF;
-    /* border: 1px solid black; */
-    border: none;
-    padding: 8px 18px;
-    background-color: blue;
-    color: #fff;
-`;
-
-//CSS MAINDIV
-
-const Maindiv = styled.div`
-    display: grid;
-`
-
-const Pokecard = styled.div`
-    margin: 50px;
-    display: flex;
-    flex-direction: column;
-    /* border: 1px solid gray; */
-    width: 18vw;
-    height: 40vh;
-    background-color: lightgray;
-`
-
-const Pokephoto = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 30vh;
-    width: 18vw;
-    /* border: 1px solid red; */
-`
-
-const Pokebutton = styled.div`
-    display: flex;
-`
-
-const Buttons = styled.button`
-    background-color: lightgray;
-    border-radius: 20px;
-    border: 1px solid gray;
-    height: 10vh;
-    width: 9vw;
-`
 
 export function Pokedex() {
-    const {pokemon, pokemonDetail, setPokemon, setPokemonDetail} = useContext(PokemonContext)
+    const { pokeList, setPokeList } = useContext(PokemonContext)
     ///// USAR O POKEMONDETAIL PARA PEGAR OS DADOS, JÁ ESTÁ COMO ESTADO GLOBAL. QUALQUER DÚVIDA ME CHAMA - LÉO
+
+    const navigate = useNavigate()
+
+    const goToHome = () => {
+        navigate('/')
+    }
+
+    const goToDetails = () => {
+        navigate('/details')
+    }
+
+    const removePokemon = (itemToRemove) => {
+        const index = pokeList.findIndex((i) => { return i.id === itemToRemove.id })
+
+        let newPokeList = [...pokeList]
+
+        if (newPokeList[index].amount === 1) {
+            newPokeList.splice(index, 1)
+        } else {
+            newPokeList[index].amount -= 1;
+        }
+        setPokeList(newPokeList)
+    }
+
+    const pokedexList = pokeList.length === 0 ? (
+        <h2> Você ainda não pegou nenhum Pokémon! </h2>
+    ) : (
+        pokeList.map((poke) => {
+            return (
+                <Pokecard>
+                    <Pokephoto>
+                        <img src={poke.sprites.front_default} />
+                        <p> {poke.name} </p>
+                    </Pokephoto>
+                    <Pokebutton>
+                        <Buttons onClick={() => removePokemon(poke)}> Remover </Buttons>
+                        <Buttons onClick={goToDetails}> Detalhes </Buttons>
+                    </Pokebutton>
+                </Pokecard>
+            )
+        })
+    )
+
+
     return (
         <>
             <Header>
-                <Button> Voltar para lista de Pokemons </Button>
+                <Button onClick={goToHome}> Voltar para lista de Pokemons </Button>
                 <h2> POKEDEX </h2>
             </Header>
             <Maindiv>
-                <Pokecard>
-                    <Pokephoto>
-                        <p> POKE CARD </p>
-                    </Pokephoto>
-                    <Pokebutton>
-                        <Buttons> Remover </Buttons>
-                        <Buttons> Detalhes </Buttons>
-                    </Pokebutton>
-                </Pokecard>
+                {pokedexList}
             </Maindiv>
         </>
     )

@@ -11,7 +11,7 @@ import PokemonContext from "../../contexts/DataContext";
 
 
 export function Home () {
-    const {pokemon, pokemonDetail, setPokemon, setPokemonDetail} = useContext(PokemonContext)
+    const {pokemon, pokemonDetail, setPokemon, setPokemonDetail, pokeList, setPokeList } = useContext(PokemonContext)
 
     const navigate = useNavigate();
 
@@ -22,6 +22,25 @@ export function Home () {
     const goToDetails = () => {
         navigate('/details')
     }
+
+    //FUNÇÃO FEITA POR RODRIGO - PODE ALTERAR CASO ACHE QUE DA PARA SIMPLIFICAR
+    const addToPokedex = (pokemonToAdd) => {
+        const position = pokeList.findIndex((item) => {
+            return item.name === pokemonToAdd.name
+        });
+
+        const newPokemonList = [...pokeList]
+        
+        if (position === -1) {
+            newPokemonList.push({ ...pokemonToAdd, amount: 1 })
+        } else {
+            alert ('Pokémon já adicionado!')
+        }
+        setPokeList(newPokemonList)
+        console.log(pokeList)
+    };
+
+    console.log(pokeList)
 
     return (
         <HomeContainer>
@@ -40,7 +59,8 @@ export function Home () {
                                     <img key={poke.name+'1'} src={poke.sprites.front_default} />
                                 </PokemonCardImage>
                                 <PokemonCardButton key={poke.name+'7'}>
-                                    <button key={poke.name+'2'}>Adicionar a Pokédex</button>
+                                    <button key={poke.name+'2'} 
+                                    onClick={() => addToPokedex(poke)}>Adicionar a Pokédex</button>
                                     <button key={poke.name+'3'} onClick={goToDetails}>Ver detalhes</button>
                                 </PokemonCardButton>
                             </PokemonCard>
