@@ -1,5 +1,8 @@
 import { } from './style'; // Aqui vai o seu CSS do styled
 import styled from 'styled-components';
+import { useNavigate } from "react-router";
+import { useContext } from "react";
+import PokemonContext from "../../contexts/DataContext";
 
 //CSS HEADER
 const Header = styled.header`
@@ -62,6 +65,8 @@ const Buttons = styled.button`
 `
 
 export function Pokedex() {
+    const {pokemon, pokemonDetail, setPokemon, setPokemonDetail} = useContext(PokemonContext)
+    ///// USAR O POKEMONDETAIL PARA PEGAR OS DADOS, JÁ ESTÁ COMO ESTADO GLOBAL. QUALQUER DÚVIDA ME CHAMA - LÉO
     return (
         <>
             <Header>

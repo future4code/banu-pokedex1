@@ -1,15 +1,20 @@
 import { Container, HeaderSection, HeaderItems, MainSection, GoBackButton, RemoveOrAddButton, DetailsWrapper, FrontImage, BackImage, Stats, Types, Moves, Menu, MenuIcon, MenuHeader, MenuSection, GoBackButtonMenu, RemoveOrAddButtonMenu } from './style'
 
 import { useState } from 'react'
+import { useNavigate } from "react-router";
+import { useContext } from "react";
+import PokemonContext from "../../contexts/DataContext";
 
 export function Details() {
-
+    const {pokemon, pokemonDetail, setPokemon, setPokemonDetail} = useContext(PokemonContext)
+    ///// USAR O POKEMONDETAIL PARA PEGAR OS DADOS, JÁ ESTÁ COMO ESTADO GLOBAL. QUALQUER DÚVIDA ME CHAMA - LÉO
     const [menuToggle, setMenuToggle] = useState(false)
 
     return (
         <>
             {!menuToggle ? 
                 <Container>
+                    {console.log(pokemonDetail)}
                     <HeaderSection>
                         <HeaderItems>
                             <GoBackButton>Voltar</GoBackButton>
