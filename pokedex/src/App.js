@@ -1,13 +1,15 @@
 import { Routing } from "./Routing";
 
-// Assets
+import PokemonProvider from './providers/pokemonProvider'
 import { GlobalStyle } from "./assets/GlobalStyle";
 
 function App() {
   return (
     <>
       <GlobalStyle/>
-      <Routing/>
+      <PokemonProvider>
+        <Routing/>
+      </PokemonProvider>
     </>
   );
 }
