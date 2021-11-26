@@ -15,9 +15,6 @@ export function Pokedex() {
         navigate('/')
     }
 
-    const goToDetails = (name) => {
-        navigate(`/details/${name}`)
-    }
 
     const removePokemon = (itemToRemove) => {
         const index = pokeList.findIndex((i) => { return i.id === itemToRemove.id })
@@ -44,7 +41,7 @@ export function Pokedex() {
                     </Pokephoto>
                     <Pokebutton>
                         <Buttons onClick={() => removePokemon(poke)}> Remover </Buttons>
-                        <Buttons onClick={() => goToDetails(poke.name)}> Detalhes </Buttons>
+                        <Buttons onClick={() => handlePokemonDetail(poke, navigate)}> Detalhes </Buttons>
                     </Pokebutton>
                 </Pokecard>
             )
