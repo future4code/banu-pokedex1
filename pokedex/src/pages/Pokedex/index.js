@@ -15,8 +15,8 @@ export function Pokedex() {
         navigate('/')
     }
 
-    const goToDetails = () => {
-        navigate('/details')
+    const goToDetails = (name) => {
+        navigate(`/details/${name}`)
     }
 
     const removePokemon = (itemToRemove) => {
@@ -44,7 +44,7 @@ export function Pokedex() {
                     </Pokephoto>
                     <Pokebutton>
                         <Buttons onClick={() => removePokemon(poke)}> Remover </Buttons>
-                        <Buttons onClick={goToDetails}> Detalhes </Buttons>
+                        <Buttons onClick={() => goToDetails(poke.name)}> Detalhes </Buttons>
                     </Pokebutton>
                 </Pokecard>
             )
