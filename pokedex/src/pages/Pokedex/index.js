@@ -6,7 +6,7 @@ import PokemonContext from "../../contexts/DataContext";
 
 
 export function Pokedex() {
-    const { pokeList, setPokeList } = useContext(PokemonContext)
+    const { pokeList, setPokeList, handlePokemonDetail } = useContext(PokemonContext)
     ///// USAR O POKEMONDETAIL PARA PEGAR OS DADOS, JÁ ESTÁ COMO ESTADO GLOBAL. QUALQUER DÚVIDA ME CHAMA - LÉO
 
     const navigate = useNavigate()
@@ -15,9 +15,6 @@ export function Pokedex() {
         navigate('/')
     }
 
-    const goToDetails = (name) => {
-        navigate(`/details/${name}`)
-    }
 
     const removePokemon = (itemToRemove) => {
         const index = pokeList.findIndex((i) => { return i.id === itemToRemove.id })
@@ -44,7 +41,7 @@ export function Pokedex() {
                     </Pokephoto>
                     <Pokebutton>
                         <Buttons onClick={() => removePokemon(poke)}> Remover </Buttons>
-                        <Buttons onClick={() => goToDetails(poke.name)}> Detalhes </Buttons>
+                        <Buttons onClick={() => handlePokemonDetail(poke, navigate)}> Detalhes </Buttons>
                     </Pokebutton>
                 </Pokecard>
             )

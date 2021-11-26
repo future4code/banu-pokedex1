@@ -11,16 +11,12 @@ import PokemonContext from "../../contexts/DataContext";
 
 
 export function Home () {
-    const {pokemon, pokemonDetail, setPokemon, setPokemonDetail, pokeList, setPokeList } = useContext(PokemonContext)
+    const {pokemon, pokemonDetail, setPokemon, setPokemonDetail, pokeList, setPokeList, handlePokemonDetail } = useContext(PokemonContext)
 
     const navigate = useNavigate();
 
     const goToPokedex = () => {
         navigate('/pokedex')
-    }
-
-    const goToDetails = () => {
-        navigate('/details')
     }
 
     //FUNÇÃO FEITA POR RODRIGO - PODE ALTERAR CASO ACHE QUE DA PARA SIMPLIFICAR
@@ -61,7 +57,7 @@ export function Home () {
                                 <PokemonCardButton key={poke.name+'7'}>
                                     <button key={poke.name+'2'} 
                                     onClick={() => addToPokedex(poke)}>Adicionar a Pokédex</button>
-                                    <button key={poke.name+'3'} onClick={goToDetails}>Ver detalhes</button>
+                                    <button key={poke.name+'3'} onClick={() => handlePokemonDetail(poke, navigate)}>Ver detalhes</button>
                                 </PokemonCardButton>
                             </PokemonCard>
                         )
