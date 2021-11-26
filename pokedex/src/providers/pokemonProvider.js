@@ -6,6 +6,7 @@ const PokemonProvider = ({children}) => {
     const [pokemon, setPokemon] = useState(undefined)
     const [pokemonDetail, setPokemonDetail] = useState([])
     const [pokeList, setPokeList] = useState([])
+    const [pokeInfo, setPokeInfo] = useState({})
 
     useEffect(() => {
         axios.get(`https://pokeapi.co/api/v2/pokemon/`)
@@ -33,6 +34,12 @@ const PokemonProvider = ({children}) => {
         })
     }, [pokemon])
 
+
+    const handlePokemonDetail = (pokemon, navigate) => {
+        setPokeInfo(pokemon)
+        navigate('/details')
+    }
+
     return(
         <PokemonContext.Provider value={{
             pokemon,
@@ -40,7 +47,9 @@ const PokemonProvider = ({children}) => {
             pokeList,
             setPokemon,
             setPokemonDetail,
-            setPokeList
+            setPokeList,
+            handlePokemonDetail,
+            pokeInfo
         }}>
             {children}
         </PokemonContext.Provider>

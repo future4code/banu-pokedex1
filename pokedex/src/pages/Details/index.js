@@ -6,19 +6,24 @@ import { useContext } from "react";
 import PokemonContext from "../../contexts/DataContext";
 
 export function Details() {
-    const {pokemon, pokemonDetail, setPokemon, setPokemonDetail} = useContext(PokemonContext)
-    ///// USAR O POKEMONDETAIL PARA PEGAR OS DADOS, JÁ ESTÁ COMO ESTADO GLOBAL. QUALQUER DÚVIDA ME CHAMA - LÉO
+    const { pokeInfo } = useContext(PokemonContext)
+
+    const { name, sprites, stats, types, moves } = pokeInfo
+
     const [menuToggle, setMenuToggle] = useState(false)
+
+    const navigate = useNavigate()
+
+    if (pokeInfo) navigate('/')
 
     return (
         <>
             {!menuToggle ? 
                 <Container>
-                    {console.log(pokemonDetail)}
                     <HeaderSection>
                         <HeaderItems>
-                            <GoBackButton>Voltar</GoBackButton>
-                            <h3>PokeName</h3>
+                            <GoBackButton onClick={() => navigate('/')}>Voltar</GoBackButton>
+                            <h3>{name}</h3>
                             <RemoveOrAddButton>Adicionar/Remover</RemoveOrAddButton>
                             <MenuIcon onClick={() => setMenuToggle(!menuToggle)}/>
                         </HeaderItems>
@@ -26,30 +31,36 @@ export function Details() {
                     <MainSection>
                         <DetailsWrapper>
                             <FrontImage>
-                                <h4>Frontal Image</h4>
+                                <img src={sprites?.front_default} alt={name}/>
                             </FrontImage>
                             <BackImage>
-                                <h4>Back Image</h4>
+                                <img src={sprites?.back_default} alt={name}/>
                             </BackImage>
                             <Stats>
                                 <h2>Stats</h2>
-                                <p>HP</p>
-                                <p>Attack</p>
-                                <p>Defense</p>
-                                <p>Special-Attack</p>
-                                <p>Special-Defense</p>
-                                <p>Speed</p>
+                                {stats?.map((stat, i) => {
+                                    const statsName = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
+
+                                    return (
+                                        <>
+                                            <strong>{statsName[i]}</strong>
+                                            <p>{stat.base_stat}</p>
+                                        </>
+                                    )
+                                })
+
+                                }
                             </Stats>
                             <Types>
-                                <h2>Type 1</h2>
-                                <h2>Type 2</h2>
+                                <h2>{types && types[0]?.type?.name}</h2>
+                                <h2>{types && types[1]?.type?.name}</h2>
                             </Types>
                             <Moves>
-                                <h2>Moves</h2>
-                                <p>Move 1</p>
-                                <p>Move 2</p>
-                                <p>Move 3</p>
-                                <p>Move 4</p>
+                                {moves?.map((move, i) => {
+                                    return (
+                                        i <= 5 ? <p>{move.move.name}</p> : null
+                                    )
+                                })}
                             </Moves>
                         </DetailsWrapper>
                     </MainSection>
