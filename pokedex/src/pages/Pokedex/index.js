@@ -1,4 +1,4 @@
-import { Header, Button, Maindiv, Pokecard, Pokephoto, Pokebutton, Buttons } from './style';
+import { Header, Button, Maindiv, Pokecard, Pokephoto, Pokebutton, Buttons, P } from './style';
 // import styled from 'styled-components';
 import { useNavigate } from "react-router";
 import { useContext } from "react";
@@ -36,8 +36,8 @@ export function Pokedex() {
             return (
                 <Pokecard>
                     <Pokephoto>
+                        <P> {poke.name} </P>
                         <img src={poke.sprites.front_default} />
-                        <p> {poke.name} </p>
                     </Pokephoto>
                     <Pokebutton>
                         <Buttons onClick={() => removePokemon(poke)}> Remover </Buttons>
