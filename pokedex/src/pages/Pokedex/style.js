@@ -59,7 +59,7 @@ export const Pokebutton = styled.div`
     margin: 5px 5px;
 `
 
-export const Buttons = styled.button`
+export const ButtonRemove = styled.button`
     background-color: #0d5c83;
     color: #fff;
     font-size: 15px;
@@ -67,4 +67,32 @@ export const Buttons = styled.button`
     border: 1px solid gray;
     height: 7vh;
     width: 9vw;
+    :hover {
+        background-color: #dc0a2d;
+        border: none;
+    }
+    :active {
+        background-color: red;
+        border: none;
+    }
+`
+
+export const ButtonDetails = styled.button`
+    background-color: #0d5c83;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 20px;
+    border: 1px solid gray;
+    height: 7vh;
+    width: 9vw;
+    :hover {
+        background-color: #f4a261;
+        color: black;
+        border: none;
+    }
+    :active {
+        background-color: #Ff9a49;
+        color: black;
+        border: none;
+    }
 `
