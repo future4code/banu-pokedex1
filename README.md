@@ -8,9 +8,16 @@ Nome dos integrantes:
 Link do Surge: www.link.com.br
 
 O que funciona:
-- Item 1
-- Item 2
+- Páginas Home, Pokedex e Details;
+- Navegação entre páginas;
+- Chamada de pokemons da API;
+- Adicionar/Remover pokemons da Pokedex;
+- Visualização de detalhes através da Home;
+- Visualização de detalhes através da Pokedex;
 
 O que não funciona: 
-- Item 3
-- Item 4
+- Tudo está funcionando corretamente;
+
+Imagens:
+TIRE PRINTS DAS TELAS DO SEU SITE E COLE AQUI
+
